@@ -1,1 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.clear-button {
+    background-color: lightcoral;
+}
+
+.operator {
+    background-color: lightcyan;
+}
+
+.number {
+    background-color: lightgreen;
+}
+
+.button-grid {
+    width: 100%;
+    max-width: 500px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 5px;
+    grid-template-areas: 
+    'display display display display display'
+    'btn7 btn8 btn9 btnAC btnX'
+    'btn4 btn5 btn6 btnMultiply btnDivide'
+    'btn1 btn2 btn3 btnPlus btnMinus'
+    'btn0 btnSign btnComma equal equal';
+}
+
+#display {
+    grid-area: display;
+    text-align: right;
+    border: 1px solid black;
+}
+
+#btnEqual {
+    grid-area: equal;
+    width: 205px;
+}
+
+#btn0 {
+    grid-area: btn0;
+}
+
+#btn1 {
+    grid-area: btn1;
+}
+
+#btn2 {
+    grid-area: btn2;
+}
+
+#btn3 {
+    grid-area: btn3;
+}
+
+#btn4 {
+    grid-area: btn4;
+}
+
+#btn5 {
+    grid-area: btn5;
+}
+
+#btn6 {
+    grid-area: btn6;
+}
+
+#btn7 {
+    grid-area: btn7;
+}
+
+#btn8 {
+    grid-area: btn8;
+}
+
+#btn9 {
+    grid-area: btn9;
+}
+
+#btnSign {
+    grid-area: btnSign;
+}
+
+#btnComma {
+    grid-area: btnComma;
+}
+
+#btnPlus {
+    grid-area: btnPlus;
+}
+#btnMinus {
+    grid-area: btnMinus;
+}
+
+#btnMultiply {
+    grid-area: btnMultiply;
+}
+
+#btnDivide {
+    grid-area: btnDivide;
+}
+
+#btnAC {
+    grid-area: btnAC;
+}
+
+#btnX {
+    grid-area: btnX;
+}
