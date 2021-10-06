@@ -1,36 +1,36 @@
 const numbersList_button = document.querySelectorAll('.number');
 const number_button = document.querySelector('.number');
 const operatorsList_button = document.querySelectorAll('.operator');
+const operator_button = document.querySelector('.operator');
 const equals_button = document.querySelector('.equals');
 const allClear_button = document.querySelector('.all-clear');
 const delete_button = document.querySelector('.delete');
 const lastOperand_div = document.querySelector('.top-display');
 const currentOperand_div = document.querySelector('.btm-display');
 
-let isPositive = true;
-
 numbersList_button.forEach(number_button => number_button.addEventListener('click', () => {
     if (number_button.innerText === '.' && currentOperand_div.innerText.includes('.')) return;
-    currentOperand_div.innerText += number_button.innerText;
+    if (number_button.innerText === '+/-') changeSign();
+    else {
+        currentOperand_div.innerText += number_button.innerText;
+    }
 }));
 
-
-// let displayValue = 0;
-
-
-// buttons_div.forEach(btn_button => btn_button.addEventListener('click', () => display(this.textContent)));
+function changeSign() {
+    currentOperand_div.innerText *= -1; 
+}
 
 
-// function display(thing) {
-//     console.log(btn_button.textContent);
-//     btmDisplay_p.textConent += ' ' + thing;
-// }
+
+// operatorsList_button.forEach(operator_button => operator_button.addEventListener('click', () => {
+
+// }))
 
 
-let add = (num1, num2) => {return num1 + num2};
-let substract = (num1, num2) => {return num1 - num2};
-let multiply = (num1, num2) => {return num1 * num2};
-let divide = (num1, num2) => {return num1 / num2};
+// let add = (num1, num2) => {return num1 + num2};
+// let substract = (num1, num2) => {return num1 - num2};
+// let multiply = (num1, num2) => {return num1 * num2};
+// let divide = (num1, num2) => {return num1 / num2};
 
 // function operate(operator, num1, num2) {
 //     switch(operator) {
@@ -51,4 +51,8 @@ let divide = (num1, num2) => {return num1 / num2};
 
 // window.addEventListener('keydown', function(e){
 //     console.log(e);
+//     if (e.key === '0') {
+//         console.log('!!111');
+//     }
 // })
+
