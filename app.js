@@ -1,38 +1,31 @@
-const topDisplay_p = document.getElementById('top-display');
-const btmDisplay_p = document.getElementById('btm-display');
-const zero_button = document.getElementById('btn0');
-const one_button = document.getElementById('btn1');
-const two_button = document.getElementById('btn2');
-const three_button = document.getElementById('btn3');
-const four_button = document.getElementById('btn4');
-const five_button = document.getElementById('btn5');
-const six_button = document.getElementById('btn6');
-const seven_button = document.getElementById('btn7');
-const eight_button = document.getElementById('btn8');
-const nine_button = document.getElementById('btn9');
-const ac_button = document.getElementById('btnAC');
-const x_button = document.getElementById('btnX');
-const plus_button = document.getElementById('btnPlus');
-const minus_button = document.getElementById('btnMinus');
-const multiply_button = document.getElementById('btnMultiply');
-const divide_button = document.getElementById('btnDivide');
-const comma_button = document.getElementById('btnComma');
-const sign_button = document.getElementById('btnSign');
-const buttons_div = document.querySelectorAll('button');
-const btn_button = document.querySelector('button');
+const numbersList_button = document.querySelectorAll('.number');
+const number_button = document.querySelector('.number');
+const operatorsList_button = document.querySelectorAll('.operator');
+const equals_button = document.querySelector('.equals');
+const allClear_button = document.querySelector('.all-clear');
+const delete_button = document.querySelector('.delete');
+const lastOperand_div = document.querySelector('.top-display');
+const currentOperand_div = document.querySelector('.btm-display');
 
-let displayValue = 0;
+let isPositive = true;
+
+numbersList_button.forEach(number_button => number_button.addEventListener('click', () => {
+    if (number_button.innerText === '.' && currentOperand_div.innerText.includes('.')) return;
+    currentOperand_div.innerText += number_button.innerText;
+}));
 
 
-buttons_div.forEach(btn_button => btn_button.addEventListener('click', () => display(this.textConent)));
+// let displayValue = 0;
 
 
-function display(thing) {
-    console.log(btn_button.textContent);
-    btmDisplay_p.textConent += ' ' + thing;
-}
+// buttons_div.forEach(btn_button => btn_button.addEventListener('click', () => display(this.textContent)));
 
-two_button.onclick = () => console.log(two_button.textContent);
+
+// function display(thing) {
+//     console.log(btn_button.textContent);
+//     btmDisplay_p.textConent += ' ' + thing;
+// }
+
 
 let add = (num1, num2) => {return num1 + num2};
 let substract = (num1, num2) => {return num1 - num2};
