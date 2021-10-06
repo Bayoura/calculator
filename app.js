@@ -20,7 +20,14 @@ function changeSign() {
     currentOperand_div.innerText *= -1; 
 }
 
+allClear_button.addEventListener('click', () => {
+    currentOperand_div.innerText = '';
+    lastOperand_div.innerText = '';
+});
 
+delete_button.addEventListener('click', () => {
+    currentOperand_div.innerText = currentOperand_div.innerText.slice(0, -1);
+});
 
 // operatorsList_button.forEach(operator_button => operator_button.addEventListener('click', () => {
 
