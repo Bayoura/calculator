@@ -36,8 +36,7 @@ function changeSign() {
 
 operatorsList_button.forEach(button => button.addEventListener('click', () => {
     if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-') return;
-    if (previousOperand_div.innerText !== '') {
-        // determineOperands();
+    if (previousOperand_div.innerText !== '' && !previousOperand_div.innerText.includes('=')) {
         currentOperand = parseFloat(currentOperand_div.innerText);
         currentOperator = button.innerText;
         operate(currentOperand, previousOperand, previousOperator);
@@ -46,16 +45,10 @@ operatorsList_button.forEach(button => button.addEventListener('click', () => {
     else {
         previousOperator = button.innerText;
         previousOperand = parseFloat(currentOperand_div.innerText);
-        previousOperand_div.innerText += ` ${previousOperand} ${previousOperator}`;
+        previousOperand_div.innerText = ` ${previousOperand} ${previousOperator}`;
         currentOperand_div.innerText = '';
     }
 }));
-
-// function determineOperands() {
-//     currentOperand = parseFloat(currentOperand_div.innerText);
-//     // previousOperand = parseFloat(previousOperand_div.innerText.slice(0, -1));
-//     // previousOperator = previousOperand_div.innerText.slice(-1);
-// }
 
 let displayInterimResult = (result) => {
     previousOperand_div.innerText = ` ${result} ${currentOperator}`;
@@ -66,15 +59,10 @@ let displayInterimResult = (result) => {
 
 equals_button.addEventListener('click', () => {
     if (currentOperand_div.innerText === '' || previousOperand_div.innerText === '' || previousOperator === '' || previousOperand_div.innerText.includes('=')) return;
-    // determineOperands();
     currentOperand = parseFloat(currentOperand_div.innerText);
     operate(currentOperand, previousOperand, previousOperator);
     previousOperand_div.innerText = `${previousOperand} ${previousOperator} ${currentOperand} =`
     currentOperand_div.innerText = result;
-    previousOperator = currentOperator;
-    previousOperand = result;
-    currentOperand = '';
-
 });
 
 function operate(current, last, operator) {
