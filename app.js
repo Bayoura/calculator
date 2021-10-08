@@ -12,43 +12,69 @@ let previousOperator = '';
 let currentOperator = '';
 let result = '';
 
-allClear_button.addEventListener('click', () => {
+allClear_button.addEventListener('click', () => clearDisplay());
+delete_button.addEventListener('click', () => deleteLastEntry());
+numbersList_button.forEach(button => button.addEventListener('click', () => appendNumber(button.innerText)));
+operatorsList_button.forEach(button => button.addEventListener('click', () => chooseOperator(button.innerText)));
+equals_button.addEventListener('click', () => equals());
+
+window.addEventListener('keydown', e => {
+    if (e.key >= 0 || e.key <= 9) appendNumber(e.key);
+    if (e.key === '.' || e.key === ',') convertComma(e.key);
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') convertOperator(e.key);
+    if (e.key === 'Backspace') deleteLastEntry();
+    if (e.key === 'Escape') clearDisplay();
+    if (e.key === '=' || e.key === 'Enter') equals();
+});
+
+let convertOperator = operator => {
+    if (operator === '*') operator = '×';
+    if (operator === '/') operator = '÷';
+    chooseOperator(operator);
+}
+
+let convertComma = comma => {
+    if (comma === ',') comma = '.';
+    appendNumber(comma);
+}
+
+function clearDisplay() {
     currentOperand_div.innerText = '';
     previousOperand_div.innerText = '';
-});
+}
 
-delete_button.addEventListener('click', () => {
+function deleteLastEntry() {
     currentOperand_div.innerText = currentOperand_div.innerText.slice(0, -1);
-});
+}
 
-numbersList_button.forEach(button => button.addEventListener('click', () => {
-    if (button.innerText === '.' && currentOperand_div.innerText.includes('.')) return;
-    if (button.innerText === '+/-') changeSign();
+function appendNumber(number) {
+    if (number === '.' && currentOperand_div.innerText.includes('.')) return;
+    if (number === '+/-') changeSign();
     else {
-        currentOperand_div.innerText += button.innerText;
+        currentOperand_div.innerText += number;
     }
-}));
+}
 
-function changeSign() {
-    if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-') return;
+let changeSign = () => {
+    if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-' || currentOperand_div.innerText === '.') return;
     currentOperand_div.innerText *= -1; 
 }
 
-operatorsList_button.forEach(button => button.addEventListener('click', () => {
-    if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-') return;
+function chooseOperator(operator) {
+    if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-' || currentOperand_div.innerText === '.') return;
     if (previousOperand_div.innerText !== '' && !previousOperand_div.innerText.includes('=')) {
         currentOperand = parseFloat(currentOperand_div.innerText);
-        currentOperator = button.innerText;
+        currentOperator = operator;
         operate(currentOperand, previousOperand, previousOperator);
         displayInterimResult(result);
     }
     else {
-        previousOperator = button.innerText;
+        previousOperator = operator;
         previousOperand = parseFloat(currentOperand_div.innerText);
         previousOperand_div.innerText = ` ${previousOperand} ${previousOperator}`;
         currentOperand_div.innerText = '';
     }
-}));
+}
 
 let displayInterimResult = (result) => {
     previousOperand_div.innerText = ` ${result} ${currentOperator}`;
@@ -57,13 +83,18 @@ let displayInterimResult = (result) => {
     previousOperand = result;
 };
 
-equals_button.addEventListener('click', () => {
-    if (currentOperand_div.innerText === '' || previousOperand_div.innerText === '' || previousOperator === '' || previousOperand_div.innerText.includes('=')) return;
+
+function equals() {
+    if (currentOperand_div.innerText === '' || previousOperand_div.innerText === '' || previousOperand_div.innerText.includes('=')) return;
     currentOperand = parseFloat(currentOperand_div.innerText);
     operate(currentOperand, previousOperand, previousOperator);
+    displayEqualsResult(result);
+}
+
+let displayEqualsResult = (result) => {
     previousOperand_div.innerText = `${previousOperand} ${previousOperator} ${currentOperand} =`
     currentOperand_div.innerText = result;
-});
+}
 
 function operate(current, last, operator) {
     switch(operator) {
@@ -86,11 +117,3 @@ let add = (num1, num2) => result = num1 + num2;
 let substract = (num1, num2) => result = num1 - num2;
 let multiply = (num1, num2) => result = num1 * num2;
 let divide = (num1, num2) => result = num1 / num2;
-
-// window.addEventListener('keydown', function(e){
-//     console.log(e);
-//     if (e.key === '0') {
-//         console.log('!!111');
-//     }
-// })
-
