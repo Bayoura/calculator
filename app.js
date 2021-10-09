@@ -22,9 +22,9 @@ window.addEventListener('keydown', e => {
     if (e.key >= 0 || e.key <= 9) appendNumber(e.key);
     if (e.key === '.' || e.key === ',') convertComma(e.key);
     if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') convertOperator(e.key);
+    if (e.key === '=' || e.key === 'Enter') equals();
     if (e.key === 'Backspace') deleteLastEntry();
     if (e.key === 'Escape') clearDisplay();
-    if (e.key === '=' || e.key === 'Enter') equals();
 });
 
 let convertOperator = operator => {
