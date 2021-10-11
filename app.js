@@ -62,6 +62,10 @@ let changeSign = () => {
 
 function chooseOperator(operator) {
     if (currentOperand_div.innerText === '' || currentOperand_div.innerText === '-' || currentOperand_div.innerText === '.') return;
+    if (currentOperand_div.innerText === '0' && previousOperator === '÷') {
+        alert('You cannot divide by 0, silly!');
+        return;
+    }
     if (previousOperand_div.innerText !== '' && !previousOperand_div.innerText.includes('=')) {
         currentOperand = parseFloat(currentOperand_div.innerText);
         currentOperator = operator;
@@ -87,6 +91,10 @@ let displayInterimResult = (result) => {
 function equals() {
     if (currentOperand_div.innerText === '' || previousOperand_div.innerText === '' || previousOperand_div.innerText.includes('=')) return;
     currentOperand = parseFloat(currentOperand_div.innerText);
+    if (currentOperand === 0 && previousOperator === '÷') {
+        alert('You cannot divide by 0, silly!');
+        return;
+    }
     operate(currentOperand, previousOperand, previousOperator);
     displayEqualsResult(result);
 }
